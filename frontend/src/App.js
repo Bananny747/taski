@@ -5,6 +5,9 @@ import Task from "./components/Task";
 import TabList from "./components/TabList";
 
 axios.interceptors.response.use(function (response) {
+  if (response.config.method === "delete") {
+    return response;
+  }
   if (response.headers['content-type'] !== 'application/json') {
     alert('unsupport data format in server response')
     return Promise.reject(new Error('unsupport data format'));
